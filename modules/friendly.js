@@ -18,6 +18,10 @@ exports.remove_friendly = user => {
 }
 
 exports.friendly = user => {
-  set_friendly(user)
   return friendly[user.id]
+}
+
+exports.friendly_all = () => {
+  console.log(friendly)
+  return friendly
 }

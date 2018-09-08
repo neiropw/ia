@@ -7,7 +7,52 @@ module.exports = msg => {
   const message = msg_data[1]
   const user_friendly = friendly.friendly(msg.author)
 
-  if(/かわいい*$/.test(message)) {
+  if(/おはよう/.test(message)) {
+    if(user_friendly <= -3) {
+      msg.channel.send(`<@!${msg.author.id}> …おはよう`)
+      friendly.remove_friendly(msg.author)
+      return
+    }
+    
+    friendly.add_friendly(msg.author)
+    if(user_friendly <= 3) {
+      msg.channel.send(`<@!${msg.author.id}> おはようー`)
+    } 
+    else if(user_friendly > 3) {
+      msg.channel.send(`<@!${msg.author.id}> おはよ！`)
+    }
+  }
+  else if(/こんにちは/.test(message)) {
+    if(user_friendly <= -3) {
+      msg.channel.send(`<@!${msg.author.id}> …こんにちは`)
+      friendly.remove_friendly(msg.author)
+      return
+    }
+    
+    friendly.add_friendly(msg.author)
+    if(user_friendly <= 3) {
+      msg.channel.send(`<@!${msg.author.id}> こんにちはー`)
+    } 
+    else if(user_friendly > 3) {
+      msg.channel.send(`<@!${msg.author.id}> こんにちは～`)
+    }
+  }
+  else if(/こんばんは/.test(message)) {
+    if(user_friendly <= -3) {
+      msg.channel.send(`<@!${msg.author.id}> …こんばんは`)
+      friendly.remove_friendly(msg.author)
+      return
+    }
+    
+    friendly.add_friendly(msg.author)
+    if(user_friendly <= 3) {
+      msg.channel.send(`<@!${msg.author.id}> こんばんはー`)
+    } 
+    else if(user_friendly > 3) {
+      msg.channel.send(`<@!${msg.author.id}> こんばんは！`)
+    }
+  }
+  else if(/かわいい*$/.test(message)) {
     console.log('app[message]: かわいい')
 
     if(user_friendly <= -3) {
