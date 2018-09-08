@@ -46,6 +46,11 @@ client.on('message', msg => {
     console.log('app[message]: (՞ةڼ◔)')
     msg.channel.send('(՞ةڼ◔) ｲﾋ-wwwww')
   }
+  else if(/許してください[(?:なん)何]でもしますから/.test(msg.content)) {
+    console.log('app[message]: 許してください何でもしますから')
+    msg.react('🤔')
+    msg.channel.send('<@!${msg.author.id}> ん？今何でもするって言ったよね')
+  }
   else if(/🖕/.test(msg.content)) {
     console.log('app[message]: 🖕')
     msg.react('🖕')
