@@ -58,7 +58,7 @@ module.exports = msg => {
       msg.channel.send(`<@!${msg.author.id}> こんばんは！`)
     }
   }
-  else if(/大?[好す]き/) {
+  else if(/大?[好す]き/.test(message)) {
     console.log('mention: 好き')
     if(user_friendly <= -3) {
       msg.channel.send(`<@!${msg.author.id}> 私は嫌いです。`)
