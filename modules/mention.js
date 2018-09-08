@@ -58,7 +58,7 @@ module.exports = msg => {
       msg.channel.send(`<@!${msg.author.id}> こんばんは！`)
     }
   }
-  else if(/かわいい*$/.test(message)) {
+  else if(/かわいい+$/.test(message)) {
     console.log('mention: かわいい')
 
     if(user_friendly <= -3) {
@@ -77,7 +77,7 @@ module.exports = msg => {
     }
 
   }
-  else if(/あほ|ばか|くそ|[死し]ね/.test(message)) {
+  else if(/あほ|アホ|ばか|バカ|くそ|クソ|[死し]ね|はげ|ハゲ/.test(message)) {
     console.log('mention: 暴言')
     friendly.remove_friendly(msg.author)
 
