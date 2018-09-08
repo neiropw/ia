@@ -2,9 +2,10 @@ const Discord = require('discord.js')
 const discord_config = require('./config/discord')
 
 const mention = require('./modules/mention')
+const friendly = require('./modules/friendly')
 
 const client = new Discord.Client()
-exports.client = client;
+exports.client = client
 
 client.on('ready', () => {
   console.log(`app[ready] : logged in as ${client.user.tag}!`)
@@ -13,9 +14,10 @@ client.on('ready', () => {
 client.on('message', msg => {
   if(msg.author.id === client.user.id) return;
 
-  console.log(msg.content)
+  // console.log(msg.content)
 
   const reg_mention = new RegExp(`<@${client.user.id}> .*`)
+
   if(reg_mention.test(msg.content)) {
     mention(msg)
   }
@@ -48,6 +50,14 @@ client.on('message', msg => {
     console.log('app[message]: 🖕')
     msg.react('🖕')
   }
+  
+  if(msg.channel.id === discord_config.control_channel) {
+    if(/親密度出力/.test(msg.content)) {
+      console.log('app[message]<control>: 親密度出力')
+      msg.channel.send(`\`\`\`${JSON.stringify(friendly.friendly_all())}\`\`\``)
+    }
+  }
+
 })
 
 client.login(discord_config.token)
