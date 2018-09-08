@@ -8,6 +8,7 @@ module.exports = msg => {
   const user_friendly = friendly.friendly(msg.author)
 
   if(/おはよう/.test(message)) {
+    console.log('mention: おはよう')
     if(user_friendly <= -3) {
       msg.channel.send(`<@!${msg.author.id}> …おはよう`)
       friendly.remove_friendly(msg.author)
@@ -23,6 +24,7 @@ module.exports = msg => {
     }
   }
   else if(/こんにちは/.test(message)) {
+    console.log('mention: こんにちは')
     if(user_friendly <= -3) {
       msg.channel.send(`<@!${msg.author.id}> …こんにちは`)
       friendly.remove_friendly(msg.author)
@@ -37,7 +39,8 @@ module.exports = msg => {
       msg.channel.send(`<@!${msg.author.id}> こんにちは～`)
     }
   }
-  else if(/こんばんは/.test(message)) {
+  else if(/こんばん[はわ]/.test(message)) {
+    console.log('mention: こんばんは')
     if(user_friendly <= -3) {
       msg.channel.send(`<@!${msg.author.id}> …こんばんは`)
       friendly.remove_friendly(msg.author)
@@ -53,7 +56,7 @@ module.exports = msg => {
     }
   }
   else if(/かわいい*$/.test(message)) {
-    console.log('app[message]: かわいい')
+    console.log('mention: かわいい')
 
     if(user_friendly <= -3) {
       msg.channel.send(`<@!${msg.author.id}> 話しかけないでください`)
@@ -72,7 +75,7 @@ module.exports = msg => {
 
   }
   else if(/あほ|ばか|くそ|[死し]ね/.test(message)) {
-    console.log('app[message]: 暴言')
+    console.log('mention: 暴言')
     friendly.remove_friendly(msg.author)
 
     if(user_friendly <= -3) {
