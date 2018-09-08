@@ -3,11 +3,13 @@ const friendly = require('./friendly')
 const serifs = require('./serifs')
 
 module.exports = msg => {
-  const message = japanese.msg.content
-  friendly.add_friendly(msg.author)
-  const userFriendly = friendly.friendly()
+  const message = japanese.kanaToHira(msg.content)
+  console.log(message)
 
-  if(message.includes(['おは'])) {
+  friendly.addFriendly(msg.author)
+  const userFriendly = friendly.friendly(msg.author)
+
+  if(message.match(/おは/)) {
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly <= -5 ? serifs.greet.helloMorning.hate :
@@ -17,7 +19,7 @@ module.exports = msg => {
     return true
   }
 
-  if(message.includes(['こんにちは', 'こんにちわ'])) {
+  if(message.match(/こんにち[はわ]/)) {
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly <= -5 ? serifs.greet.hello.hate :
@@ -27,7 +29,7 @@ module.exports = msg => {
     return true
   }
   
-  if(message.includes(['こんばんは', 'こんばんわ'])) {
+  if(message.match(/こんばん[はわ]/)) {
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly <= -5 ? serifs.greet.helloNight.hate :
@@ -37,7 +39,7 @@ module.exports = msg => {
     return true
   }
   
-  if(message.includes(['好き', 'すき'])) {
+  if(message.match(/[好す]き/)) {
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly < -5 ? serifs.love.love.hate :
@@ -47,7 +49,7 @@ module.exports = msg => {
     return true
   }
   
-  if(message.includes(['かわいい', '可愛い'])) {
+  if(message.match(/かわいい|可愛い/)) {
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly < -5 ? serifs.love.kawaii.hate2 :
@@ -58,7 +60,7 @@ module.exports = msg => {
     return true
   }
 
-  if(message.includes(['あほ', 'ばか', 'くそ', '死ね', 'しね', 'はげ', 'はげ', 'ぶす'])) {
+  if(message.match(/あほ|ばか|くそ|死ね|しね|はげ|はげ|ぶす/)) {
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly < -5 ? serifs.vl.hate :
@@ -68,15 +70,15 @@ module.exports = msg => {
     return true
   }
 
-  if(message.includes(['ごめん', 'すみません', 'すいません', '許して', 'ゆるして'])) {
+  if(message.match(/ごめん|す[みい]ません|許して|ゆるして/)) {
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly < -5 ? serifs.apology.hate3 :
       userFriendly <= -3 ? serifs.apology.hate2 :
       userFriendly <= -1 ? serifs.apology.hate1 :
-      userFriendly <= 5 ? serifs.vl.normal :
+      userFriendly <= 5 ? serifs.apology.normal :
       userFriendly <= 10 ? serifs.apology.love1 :
-      serifs.vl.love2}`
+      serifs.apology.love2}`
     )
     return true
   }

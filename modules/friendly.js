@@ -21,7 +21,6 @@ exports.removeFriendly = user => {
 }
 
 exports.friendly = user => {
-  console.log(`modules.friendly[friendly] : ${user.username} --> ${friendly[user.id]}`)
   return friendly[user.id]
 }
 

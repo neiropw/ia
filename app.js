@@ -16,7 +16,7 @@ client.on('message', msg => {
   if(msg.author.id === client.user.id) return
   const regMention = new RegExp(`<@${client.user.id}>[ 　].*`)
 
-  if(regMention.test()) {
+  if(regMention.test(msg.content)) {
     mention(msg)
   } // メンション付きのメッセージ
   // else {
