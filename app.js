@@ -26,7 +26,7 @@ client.on('message', msg => {
     console.log('app[message]: は？')
     msg.react('🤔')
   }
-  else if(/草|くさ[wｗ]/.test(msg.content)) {
+  else if(/(?:草|くさ)[wｗ]/.test(msg.content)) {
     console.log('app[message]: 草ｗ')
     msg.react('💢')
     msg.channel.send(`<@!${msg.author.id}> 草に草を生やすな`)
