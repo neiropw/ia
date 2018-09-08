@@ -1,31 +1,31 @@
 let friendly = { }
 
-const set_friendly = user => {
+const setFriendly = user => {
   if(!(user.id in friendly)) {
-    friendly[user.id] = 0;
+    friendly[user.id] = 0
   }
 }
 
-exports.set_friendly = set_friendly
+exports.setFriendly = setFriendly
 
-exports.add_friendly = user => {
-  set_friendly(user)
-  friendly[user.id]++;
-  console.log(`modules.friendly[add_friendly] : ${user.username} --> ${friendly[user.id]}`);
+exports.addFriendly = user => {
+  setFriendly(user)
+  friendly[user.id]++
+  console.log(`modules.friendly[addFriendly] : ${user.username} --> ${friendly[user.id]}`)
 }
 
-exports.remove_friendly = user => {
-  set_friendly(user)
-  friendly[user.id]--;
-  console.log(`modules.friendly[remove_friendly] : ${user.username} --> ${friendly[user.id]}`);
+exports.removeFriendly = user => {
+  setFriendly(user)
+  friendly[user.id]--
+  console.log(`modules.friendly[removeFriendly] : ${user.username} --> ${friendly[user.id]}`)
 }
 
 exports.friendly = user => {
-  console.log(`modules.friendly[friendly] : ${user.username} --> ${friendly[user.id]}`);
+  console.log(`modules.friendly[friendly] : ${user.username} --> ${friendly[user.id]}`)
   return friendly[user.id]
 }
 
-exports.friendly_all = () => {
+exports.friendlyAll = () => {
   console.log(friendly)
   return friendly
 }

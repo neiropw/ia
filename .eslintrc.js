@@ -10,17 +10,19 @@ module.exports = {
   "rules": {
     "no-console": "off",
     "no-var": "error",
+    "no-irregular-whitespace": "off",
     "prefer-arrow-callback": [ "error", { "allowNamedFunctions": true } ],
     "arrow-parens": ["error", "as-needed"],
     "dot-location": ["error", "property"],
     "prefer-template": 2,
-    "object-shorthand": ["error", 2],
+    "object-shorthand": 2,
+    "camelcase": 2,
     "no-param-reassign": ["error", { "props": true }],
     "no-else-return": "error",
-    "indent": [
-        "error",
-        2
-    ],
+    // "indent": [
+    //     "error",
+    //     2
+    // ],
     // "linebreak-style": [
     //     "error",
     //     "windows"

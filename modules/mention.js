@@ -1,143 +1,84 @@
-const app = require('../app')
+const japanese = require('../lib/japanese')
 const friendly = require('./friendly')
+const serifs = require('./serifs')
 
 module.exports = msg => {
-  friendly.set_friendly(msg.author)
+  const message = japanese.msg.content
+  friendly.add_friendly(msg.author)
+  const userFriendly = friendly.friendly()
+
+  if(message.includes(['おは'])) {
+    msg.channel.send(
+      `<@!${msg.author.id}> ${
+      userFriendly <= -5 ? serifs.greet.helloMorning.hate :
+      userFriendly <= 10 ? serifs.greet.helloMorning.normal :
+      serifs.greet.helloMorning.love}`
+    )
+    return true
+  }
+
+  if(message.includes(['こんにちは', 'こんにちわ'])) {
+    msg.channel.send(
+      `<@!${msg.author.id}> ${
+      userFriendly <= -5 ? serifs.greet.hello.hate :
+      userFriendly <= 10 ? serifs.greet.hello.normal :
+      serifs.greet.hello.love}`
+    )
+    return true
+  }
   
-  const reg_mention = new RegExp(`<@${app.client.user.id}>[\s 　](.*)`)
-  const msg_data = msg.content.match(reg_mention)
-  const message = msg_data[1]
-  const user_friendly = friendly.friendly(msg.author)
-
-
-  if(/おはよう/.test(message)) {
-    console.log('mention: おはよう')
-    if(user_friendly <= -3) {
-      msg.channel.send(`<@!${msg.author.id}> …おはよう`)
-      friendly.remove_friendly(msg.author)
-      return
-    }
-    
-    friendly.add_friendly(msg.author)
-    if(user_friendly <= 3) {
-      msg.channel.send(`<@!${msg.author.id}> おはようー`)
-    } 
-    else if(user_friendly > 3) {
-      msg.channel.send(`<@!${msg.author.id}> おはよ！`)
-    }
+  if(message.includes(['こんばんは', 'こんばんわ'])) {
+    msg.channel.send(
+      `<@!${msg.author.id}> ${
+      userFriendly <= -5 ? serifs.greet.helloNight.hate :
+      userFriendly <= 10 ? serifs.greet.helloNight.normal :
+      serifs.greet.helloNight.love}`
+    )
+    return true
   }
-  else if(/こんにちは/.test(message)) {
-    console.log('mention: こんにちは')
-    if(user_friendly <= -3) {
-      msg.channel.send(`<@!${msg.author.id}> …こんにちは`)
-      friendly.remove_friendly(msg.author)
-      return
-    }
-    
-    friendly.add_friendly(msg.author)
-    if(user_friendly <= 3) {
-      msg.channel.send(`<@!${msg.author.id}> こんにちはー`)
-    } 
-    else if(user_friendly > 3) {
-      msg.channel.send(`<@!${msg.author.id}> こんにちは～`)
-    }
+  
+  if(message.includes(['好き', 'すき'])) {
+    msg.channel.send(
+      `<@!${msg.author.id}> ${
+      userFriendly < -5 ? serifs.love.love.hate :
+      userFriendly <= 10 ? serifs.love.love.normal :
+      serifs.love.love.normal}`
+    )
+    return true
   }
-  else if(/こんばん[はわ]/.test(message)) {
-    console.log('mention: こんばんは')
-    if(user_friendly <= -3) {
-      msg.channel.send(`<@!${msg.author.id}> …こんばんは`)
-      friendly.remove_friendly(msg.author)
-      return
-    }
-    
-    friendly.add_friendly(msg.author)
-    if(user_friendly <= 3) {
-      msg.channel.send(`<@!${msg.author.id}> こんばんはー`)
-    } 
-    else if(user_friendly > 3) {
-      msg.channel.send(`<@!${msg.author.id}> こんばんは！`)
-    }
+  
+  if(message.includes(['かわいい', '可愛い'])) {
+    msg.channel.send(
+      `<@!${msg.author.id}> ${
+      userFriendly < -5 ? serifs.love.kawaii.hate2 :
+      userFriendly <= -3 ? serifs.love.kawaii.hate1 :
+      userFriendly <= 10 ? serifs.love.kawaii.normal :
+      serifs.love.kawaii.love}`
+    )
+    return true
   }
-  else if(/大?[好す]き/.test(message)) {
-    console.log('mention: 好き')
-    if(user_friendly <= -3) {
-      msg.channel.send(`<@!${msg.author.id}> 私は嫌いです。`)
-      friendly.remove_friendly(msg.author)
-      return
-    }
-    
-    friendly.add_friendly(msg.author)
-    if(user_friendly <= 3) {
-      msg.channel.send(`<@!${msg.author.id}> ありがとうございます…//`)
-    } 
-    else if(user_friendly > 10) {
-      msg.channel.send(`<@!${msg.author.id}> 私も好き`)
-    }
+
+  if(message.includes(['あほ', 'ばか', 'くそ', '死ね', 'しね', 'はげ', 'はげ', 'ぶす'])) {
+    msg.channel.send(
+      `<@!${msg.author.id}> ${
+      userFriendly < -5 ? serifs.vl.hate :
+      userFriendly <= 10 ? serifs.vl.normal :
+      serifs.vl.love}`
+    )
+    return true
   }
-  else if(/かわいい+$/.test(message)) {
-    console.log('mention: かわいい')
 
-    if(user_friendly < -7) {
-      msg.react('🔪')
-      return
-    }
-    else if(user_friendly <= -6) {
-      msg.channel.send(`<@!${msg.author.id}> やめてください、刺しますよ`)
-      friendly.remove_friendly(msg.author)
-      return
-    }
-    else if(user_friendly <= -3) {
-      msg.channel.send(`<@!${msg.author.id}> 話しかけないでください`)
-      friendly.remove_friendly(msg.author)
-      return
-    }
-
-    msg.react('❤')
-    friendly.add_friendly(msg.author)
-    if(user_friendly <= 3) {
-      msg.channel.send(`<@!${msg.author.id}> ありがとうございます！`)
-    } 
-    else if(user_friendly > 3) {
-      msg.channel.send(`<@!${msg.author.id}> ありがと！！`)
-    }
-
+  if(message.includes(['ごめん', 'すみません', 'すいません', '許して', 'ゆるして'])) {
+    msg.channel.send(
+      `<@!${msg.author.id}> ${
+      userFriendly < -5 ? serifs.apology.hate3 :
+      userFriendly <= -3 ? serifs.apology.hate2 :
+      userFriendly <= -1 ? serifs.apology.hate1 :
+      userFriendly <= 5 ? serifs.vl.normal :
+      userFriendly <= 10 ? serifs.apology.love1 :
+      serifs.vl.love2}`
+    )
+    return true
   }
-  else if(/あほ|アホ|ばか|バカ|くそ|クソ|[死し]ね|はげ|ハゲ|ぶす|ブス/.test(message)) {
-    console.log('mention: 暴言')
-    friendly.remove_friendly(msg.author)
 
-    if(user_friendly <= -3) {
-      msg.channel.send(`<@!${msg.author.id}> そうですか`)
-      return
-    }
-    
-    msg.react('😢')
-    if(user_friendly <= 3) {
-      msg.channel.send(`<@!${msg.author.id}> ひどいです…`)
-    } 
-    else if(user_friendly > 3) {
-      msg.channel.send(`<@!${msg.author.id}> ひどい！`)
-    }
-  }
-  else if(/ごめん|許して/.test(message)) {
-    console.log('mention: ごめん')
-    if(user_friendly <= 3) friendly.add_friendly(msg.author)
-
-    if(user_friendly < -7) {
-      msg.channel.send(`<@!${msg.author.id}> そんなことで許されると思ってるんですか？`)
-    }
-    else if(user_friendly <= -6) {
-      msg.channel.send(`<@!${msg.author.id}> ごめんで済んだら警察はいらないんですよ？`)
-    }
-    else if(user_friendly <= -3) {
-      msg.channel.send(`<@!${msg.author.id}> 別に何も思ってません`)
-    }
-    else if(user_friendly <= 3) {
-      msg.channel.send(`<@!${msg.author.id}> 別に謝らなくてもいいんですよ？`)
-    } 
-    else if(user_friendly > 3) {
-      msg.channel.send(`<@!${msg.author.id}> んー？なにが？`)
-    }
-
-  }
 }
