@@ -13,7 +13,7 @@ client.on('ready', () => {
 client.on('message', msg => {
   if(msg.author.id === client.user.id) return;
 
-  console.log(msg.content)
+  // console.log(msg.content)
 
   const reg_mention = new RegExp(`<@${client.user.id}> .*`)
   if(reg_mention.test(msg.content)) {
