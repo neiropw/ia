@@ -4,7 +4,7 @@ const friendly = require('./friendly')
 module.exports = msg => {
   friendly.set_friendly(msg.author)
   
-  const reg_mention = new RegExp(`<@${app.client.user.id}> (.*)`)
+  const reg_mention = new RegExp(`<@${app.client.user.id}>\s(.*)`)
   const msg_data = msg.content.match(reg_mention)
   const message = msg_data[1]
   const user_friendly = friendly.friendly(msg.author)
@@ -70,7 +70,7 @@ module.exports = msg => {
     if(user_friendly <= 3) {
       msg.channel.send(`<@!${msg.author.id}> ありがとうございます…//`)
     } 
-    else if(user_friendly > 3) {
+    else if(user_friendly > 10) {
       msg.channel.send(`<@!${msg.author.id}> 私も好き`)
     }
   }
@@ -130,7 +130,7 @@ module.exports = msg => {
       msg.channel.send(`<@!${msg.author.id}> ごめんで済んだら警察はいらないんですよ？`)
     }
     else if(user_friendly <= -3) {
-      msg.channel.send(`<@!${msg.author.id}> 特に何も思ってません`)
+      msg.channel.send(`<@!${msg.author.id}> 別に何も思ってません`)
     }
     else if(user_friendly <= 3) {
       msg.channel.send(`<@!${msg.author.id}> 別に謝らなくてもいいんですよ？`)
