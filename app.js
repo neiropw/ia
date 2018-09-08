@@ -1,7 +1,10 @@
 const Discord = require('discord.js')
 const discord_config = require('./config/discord')
 
+const mention = require('./modules/mention')
+
 const client = new Discord.Client()
+exports.client = client;
 
 client.on('ready', () => {
   console.log(`app[ready] : logged in as ${client.user.tag}!`)
@@ -12,15 +15,9 @@ client.on('message', msg => {
 
   console.log(msg.content)
 
-  if(/かわいい*$/.test(msg.content)) {
-    console.log('app[message]: かわいい')
-    msg.react('❤')
-    msg.channel.send(`<@!${msg.author.id}> ありがと！`)
-  }
-  else if(/あほ|ばか|くそ|[死し]ね/.test(msg.content)) {
-    console.log('app[message]: 暴言')
-    msg.react('😢')
-    msg.channel.send(`<@!${msg.author.id}> ひどい`)
+  const reg_mention = new RegExp(`<@${client.user.id}> .*`)
+  if(reg_mention.test(msg.content)) {
+    mention(msg)
   }
   else if(/は[?？]/.test(msg.content)) {
     console.log('app[message]: は？')
