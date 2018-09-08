@@ -4,7 +4,7 @@ const friendly = require('./friendly')
 module.exports = msg => {
   friendly.set_friendly(msg.author)
   
-  const reg_mention = new RegExp(`<@${app.client.user.id}>[\s　](.*)`)
+  const reg_mention = new RegExp(`<@${app.client.user.id}>[\s 　](.*)`)
   const msg_data = msg.content.match(reg_mention)
   const message = msg_data[1]
   const user_friendly = friendly.friendly(msg.author)
