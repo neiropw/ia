@@ -2,10 +2,13 @@ const app = require('../app')
 const friendly = require('./friendly')
 
 module.exports = msg => {
+  friendly.set_friendly(msg.author)
+  
   const reg_mention = new RegExp(`<@${app.client.user.id}> (.*)`)
   const msg_data = msg.content.match(reg_mention)
   const message = msg_data[1]
   const user_friendly = friendly.friendly(msg.author)
+
 
   if(/おはよう/.test(message)) {
     console.log('mention: おはよう')

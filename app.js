@@ -57,7 +57,7 @@ client.on('message', msg => {
       msg.channel.send(`\`\`\`${JSON.stringify(friendly.friendly_all())}\`\`\``)
     }
   }
-  
+
 })
 
 client.login(discord_config.token)
