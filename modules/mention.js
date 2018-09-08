@@ -77,7 +77,7 @@ module.exports = msg => {
     }
 
   }
-  else if(/あほ|ばか|くそ|[死し]ね/.test(message)) {
+  else if(/あほ|アホ|ばか|バカ|くそ|クソ|[死し]ね|はげ|ハゲ/.test(message)) {
     console.log('mention: 暴言')
     friendly.remove_friendly(msg.author)
 
