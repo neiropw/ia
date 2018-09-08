@@ -1,4 +1,4 @@
-let friendly = {"dummy": 1}
+let friendly = { }
 
 const set_friendly = user => {
   if(!(user.id in friendly)) {
