@@ -17,11 +17,16 @@ client.on('message', msg => {
     msg.react('❤')
     msg.channel.send(`<@!${msg.author.id}> ありがと！`)
   }
+  else if(/あほ|ばか|くそ|[死し]ね/.test(msg.content)) {
+    console.log('app[message]: 暴言')
+    msg.react('😢')
+    msg.channel.send(`<@!${msg.author.id}> ひどい`)
+  }
   else if(/は[?？]/.test(msg.content)) {
     console.log('app[message]: は？')
     msg.react('🤔')
   }
-  else if(/(?:草|くさ)[wｗ]/.test(msg.content)) {
+  else if(/草|くさ[wｗ]/.test(msg.content)) {
     console.log('app[message]: 草ｗ')
     msg.react('💢')
     msg.channel.send(`<@!${msg.author.id}> 草に草を生やすな`)
