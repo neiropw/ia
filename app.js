@@ -16,7 +16,7 @@ client.on('message', msg => {
 
   // console.log(msg.content)
 
-  const reg_mention = new RegExp(`<@${client.user.id}> .*`)
+  const reg_mention = new RegExp(`<@${client.user.id}>\s.*`)
 
   if(reg_mention.test(msg.content)) {
     mention(msg)
