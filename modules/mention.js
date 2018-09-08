@@ -58,10 +58,35 @@ module.exports = msg => {
       msg.channel.send(`<@!${msg.author.id}> こんばんは！`)
     }
   }
+  else if(/大?[好す]き/) {
+    console.log('mention: 好き')
+    if(user_friendly <= -3) {
+      msg.channel.send(`<@!${msg.author.id}> 私は嫌いです。`)
+      friendly.remove_friendly(msg.author)
+      return
+    }
+    
+    friendly.add_friendly(msg.author)
+    if(user_friendly <= 3) {
+      msg.channel.send(`<@!${msg.author.id}> ありがとうございます…//`)
+    } 
+    else if(user_friendly > 3) {
+      msg.channel.send(`<@!${msg.author.id}> 私も好き`)
+    }
+  }
   else if(/かわいい+$/.test(message)) {
     console.log('mention: かわいい')
 
-    if(user_friendly <= -3) {
+    if(user_friendly < -7) {
+      msg.react('🔪')
+      return
+    }
+    else if(user_friendly <= -6) {
+      msg.channel.send(`<@!${msg.author.id}> やめてください、刺しますよ`)
+      friendly.remove_friendly(msg.author)
+      return
+    }
+    else if(user_friendly <= -3) {
       msg.channel.send(`<@!${msg.author.id}> 話しかけないでください`)
       friendly.remove_friendly(msg.author)
       return
@@ -93,5 +118,26 @@ module.exports = msg => {
     else if(user_friendly > 3) {
       msg.channel.send(`<@!${msg.author.id}> ひどい！`)
     }
+  }
+  else if(/ごめん|許して/.test(message)) {
+    console.log('mention: ごめん')
+    if(user_friendly <= 3) friendly.add_friendly(msg.author)
+
+    if(user_friendly < -7) {
+      msg.channel.send(`<@!${msg.author.id}> そんなことで許されると思ってるんですか？`)
+    }
+    else if(user_friendly <= -6) {
+      msg.channel.send(`<@!${msg.author.id}> ごめんで済んだら警察はいらないんですよ？`)
+    }
+    else if(user_friendly <= -3) {
+      msg.channel.send(`<@!${msg.author.id}> 特に何も思ってません`)
+    }
+    else if(user_friendly <= 3) {
+      msg.channel.send(`<@!${msg.author.id}> 別に謝らなくてもいいんですよ？`)
+    } 
+    else if(user_friendly > 3) {
+      msg.channel.send(`<@!${msg.author.id}> んー？なにが？`)
+    }
+
   }
 }
