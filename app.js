@@ -16,7 +16,7 @@ client.on('message', msg => {
 
   // console.log(msg.content)
 
-  const reg_mention = new RegExp(`<@${client.user.id}>[\s　].*`)
+  const reg_mention = new RegExp(`<@${client.user.id}>[\s 　].*`)
 
   if(reg_mention.test(msg.content)) {
     mention(msg)
@@ -46,10 +46,10 @@ client.on('message', msg => {
     console.log('app[message]: (՞ةڼ◔)')
     msg.channel.send('(՞ةڼ◔) ｲﾋ-wwwww')
   }
-  else if(/許してください[(?:なん)何]でもしますから/.test(msg.content)) {
+  else if(/許してください(?:なん|何)でもしますから/.test(msg.content)) {
     console.log('app[message]: 許してください何でもしますから')
     msg.react('🤔')
-    msg.channel.send('<@!${msg.author.id}> ん？今何でもするって言ったよね')
+    msg.channel.send(`<@!${msg.author.id}> ん？今何でもするって言ったよね`)
   }
   else if(/🖕/.test(msg.content)) {
     console.log('app[message]: 🖕')
