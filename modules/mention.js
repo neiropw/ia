@@ -58,6 +58,22 @@ module.exports = msg => {
       msg.channel.send(`<@!${msg.author.id}> こんばんは！`)
     }
   }
+  else if(/大?[好す]き/) {
+    console.log('mention: 好き')
+    if(user_friendly <= -3) {
+      msg.channel.send(`<@!${msg.author.id}> 私は嫌いです。`)
+      friendly.remove_friendly(msg.author)
+      return
+    }
+    
+    friendly.add_friendly(msg.author)
+    if(user_friendly <= 3) {
+      msg.channel.send(`<@!${msg.author.id}> ありがとうございます…//`)
+    } 
+    else if(user_friendly > 3) {
+      msg.channel.send(`<@!${msg.author.id}> 私も好き`)
+    }
+  }
   else if(/かわいい+$/.test(message)) {
     console.log('mention: かわいい')
 
@@ -103,9 +119,9 @@ module.exports = msg => {
       msg.channel.send(`<@!${msg.author.id}> ひどい！`)
     }
   }
-  else if(/ごめん/.test(message)) {
+  else if(/ごめん|許して/.test(message)) {
     console.log('mention: ごめん')
-    friendly.add_friendly(msg.author)
+    if(user_friendly <= 3) friendly.add_friendly(msg.author)
 
     if(user_friendly < -7) {
       msg.channel.send(`<@!${msg.author.id}> そんなことで許されると思ってるんですか？`)
