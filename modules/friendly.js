@@ -12,15 +12,18 @@ exports.addFriendly = user => {
   setFriendly(user)
   friendly[user.id]++
   console.log(`modules.friendly[addFriendly] : ${user.username} --> ${friendly[user.id]}`)
+  return true
 }
 
 exports.removeFriendly = user => {
   setFriendly(user)
   friendly[user.id]--
   console.log(`modules.friendly[removeFriendly] : ${user.username} --> ${friendly[user.id]}`)
+  return true
 }
 
 exports.friendly = user => {
+  setFriendly(user)
   return friendly[user.id]
 }
 
