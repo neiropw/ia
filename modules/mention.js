@@ -6,10 +6,12 @@ module.exports = msg => {
   const message = japanese.kanaToHira(msg.content)
   console.log(message)
 
-  friendly.addFriendly(msg.author)
   const userFriendly = friendly.friendly(msg.author)
 
   if(message.match(/おは/)) {
+
+    friendly.addFriendly(msg.author)
+
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly <= -5 ? serifs.greet.helloMorning.hate :
@@ -20,6 +22,9 @@ module.exports = msg => {
   }
 
   if(message.match(/こんにち[はわ]/)) {
+
+    friendly.addFriendly(msg.author)
+
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly <= -5 ? serifs.greet.hello.hate :
@@ -30,6 +35,9 @@ module.exports = msg => {
   }
   
   if(message.match(/こんばん[はわ]/)) {
+
+    friendly.addFriendly(msg.author)
+
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly <= -5 ? serifs.greet.helloNight.hate :
@@ -40,6 +48,9 @@ module.exports = msg => {
   }
   
   if(message.match(/[好す]き/)) {
+
+    friendly.addFriendly(msg.author)
+
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly < -5 ? serifs.love.love.hate :
@@ -50,6 +61,9 @@ module.exports = msg => {
   }
   
   if(message.match(/かわいい|可愛い/)) {
+
+    friendly.addFriendly(msg.author)
+
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly < -5 ? serifs.love.kawaii.hate2 :
@@ -61,6 +75,9 @@ module.exports = msg => {
   }
 
   if(message.match(/あほ|ばか|くそ|死ね|しね|はげ|はげ|ぶす/)) {
+
+    friendly.removeFriendly(msg.author)
+
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly < -5 ? serifs.vl.hate :
@@ -71,6 +88,10 @@ module.exports = msg => {
   }
 
   if(message.match(/ごめん|す[みい]ません|許して|ゆるして/)) {
+
+    /* 親密度がマイナスの時は、親密度を増やす */
+    userFriendly < 0 ? friendly.addFriendly(msg.author) : false
+
     msg.channel.send(
       `<@!${msg.author.id}> ${
       userFriendly < -5 ? serifs.apology.hate3 :
