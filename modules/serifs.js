@@ -1,9 +1,14 @@
 module.exports = {
   greet: {
     helloMorning: {
-      love: 'おはよ！',
+      love: 'おはよー！',
       normal: 'おはようございます！',
       hate: '…おはようございます'
+    },
+    goodNight: {
+      love: 'おやすみ！',
+      normal: 'おやすみなさいー！',
+      hate: '…おやすみなさい'
     },
     hello: {
       love: 'こんちわー！',
