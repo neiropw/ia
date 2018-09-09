@@ -27,9 +27,9 @@ module.exports = msg => {
 
     msg.channel.send(
       `<@!${msg.author.id}> ${
-      userFriendly <= -5 ? serifs.greet.helloMorning.hate :
-      userFriendly <= 10 ? serifs.greet.helloMorning.normal :
-      serifs.greet.helloMorning.love}`
+      userFriendly <= -5 ? serifs.greet.goodNight.hate :
+      userFriendly <= 10 ? serifs.greet.goodNight.normal :
+      serifs.greet.goodNight.love}`
     )
     return true
   }
