@@ -8,6 +8,19 @@ module.exports = msg => {
 
   const userFriendly = friendly.friendly(msg.author)
 
+  if(message.match(/[起お]きて/)) {
+
+    msg.channel.send(
+      `<@!${msg.author.id}> ${
+      userFriendly <= -5 ? serifs.ping.hate :
+      userFriendly <= 10 ? serifs.ping.normal :
+      serifs.ping.love}`
+    )
+
+    return true
+    
+  }
+
   if(message.match(/おは/)) {
 
     friendly.addFriendly(msg.author)
@@ -18,7 +31,24 @@ module.exports = msg => {
       userFriendly <= 10 ? serifs.greet.helloMorning.normal :
       serifs.greet.helloMorning.love}`
     )
+
     return true
+
+  }
+
+  if(message.match(/おやすみ/)) {
+    
+    friendly.addFriendly(msg.author)
+
+    msg.channel.send(
+      `<@!${msg.author.id}> ${
+      userFriendly <= -5 ? serifs.greet.goodNight.hate :
+      userFriendly <= 10 ? serifs.greet.goodNight.normal :
+      serifs.greet.goodNight.love}`
+    )
+
+    return true
+
   }
 
   if(message.match(/こんにち[はわ]/)) {
@@ -31,7 +61,9 @@ module.exports = msg => {
       userFriendly <= 10 ? serifs.greet.hello.normal :
       serifs.greet.hello.love}`
     )
+
     return true
+
   }
   
   if(message.match(/こんばん[はわ]/)) {
@@ -44,7 +76,9 @@ module.exports = msg => {
       userFriendly <= 10 ? serifs.greet.helloNight.normal :
       serifs.greet.helloNight.love}`
     )
+
     return true
+
   }
   
   if(message.match(/[好す]き/)) {
@@ -57,7 +91,9 @@ module.exports = msg => {
       userFriendly <= 10 ? serifs.love.love.normal :
       serifs.love.love.normal}`
     )
+
     return true
+
   }
   
   if(message.match(/かわいい|可愛い/)) {
@@ -71,7 +107,9 @@ module.exports = msg => {
       userFriendly <= 10 ? serifs.love.kawaii.normal :
       serifs.love.kawaii.love}`
     )
+
     return true
+
   }
 
   if(message.match(/あほ|ばか|くそ|死ね|しね|はげ|はげ|ぶす/)) {
@@ -84,7 +122,9 @@ module.exports = msg => {
       userFriendly <= 10 ? serifs.vl.normal :
       serifs.vl.love}`
     )
+
     return true
+
   }
 
   if(message.match(/ごめん|す[みい]ません|許して|ゆるして/)) {
@@ -101,7 +141,9 @@ module.exports = msg => {
       userFriendly <= 10 ? serifs.apology.love1 :
       serifs.apology.love2}`
     )
+
     return true
+
   }
 
 }

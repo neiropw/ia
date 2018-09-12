@@ -1,4 +1,9 @@
 module.exports = {
+  ping: {
+    love: 'おきた！',
+    normal: '起きてますよ！！',
+    hate: '…'
+  },
   greet: {
     helloMorning: {
       love: 'おはよ！',
@@ -14,6 +19,11 @@ module.exports = {
       love: 'こんー！',
       normal: 'こんばんは！',
       hate: '…こんばんは'
+    },
+    goodNight: {
+      love: 'おやすみ～！良い夢を！',
+      normal: 'おやすみなさい！',
+      hate: '…おやすみなさい'
     }
   },
   love: {
